@@ -3,7 +3,7 @@ import torch
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 import os
-from uuid import uuid4
+from uuid import uuid4 
 from ultralytics import YOLO
 import logging
 import glob
