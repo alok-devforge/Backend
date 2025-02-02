@@ -34,6 +34,9 @@ try:
 except Exception as e:
     logger.error(f"Error loading model: {e}")
     raise e
+@app.get("/status")
+async def get_status():
+    return {"message": "Server is running", "status": "success"}
 
 @app.post("/detect")
 async def detect(file: UploadFile = File(...)):
