@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 # Allow CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Consider specifying trusted origins
+    allow_origins=["https://alok-devforge.github.io/BoneFractureDetectionSite/"],  # Consider specifying trusted origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -34,6 +34,11 @@ try:
 except Exception as e:
     logger.error(f"Error loading model: {e}")
     raise e
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the YOLOv8 detection API!"}
+
 @app.get("/status")
 async def get_status():
     return {"message": "Server is running", "status": "success"}
@@ -73,6 +78,15 @@ async def detect(file: UploadFile = File(...)):
                 media_type='image/jpeg',
                 headers={"X-Detection": "No detections found."}
             )
+        
+        if not results or results.boxes is None or len(results.boxes) == 0:
+            logger.info("No detections found in the image.")
+            return FileResponse(
+                upload_path,
+                media_type="image/jpeg",
+                headers={"X-Detection": "No detections found."}
+            )
+
 
         # Generate annotated image using results.plot()
         annotated_image = results.plot()
