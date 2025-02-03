@@ -78,14 +78,6 @@ async def detect(file: UploadFile = File(...)):
                 media_type='image/jpeg',
                 headers={"X-Detection": "No detections found."}
             )
-        
-        if not results or results.boxes is None or len(results.boxes) == 0:
-            logger.info("No detections found in the image.")
-            return FileResponse(
-                upload_path,
-                media_type="image/jpeg",
-                headers={"X-Detection": "No detections found."}
-            )
 
 
         # Generate annotated image using results.plot()
