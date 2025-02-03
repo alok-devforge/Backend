@@ -55,6 +55,9 @@ async def detect(file: UploadFile = File(...)):
         img_filename = f"{uuid4()}.jpg"
         upload_path = os.path.join("images", "original", img_filename)
         annotated_dir = os.path.join(os.path.dirname(__file__), "images", "annotated")
+        
+        os.makedirs("images/original", exist_ok=True)
+        os.makedirs("images/annotated", exist_ok=True)
 
         # Ensure upload and annotation directories exist
         os.makedirs(os.path.join("images", "original"), exist_ok=True)
