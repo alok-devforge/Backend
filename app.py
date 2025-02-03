@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 # Allow CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://alok-devforge.github.io/BoneFractureDetectionSite/"],  # Consider specifying trusted origins
+    allow_origins=["hhttps://alok-devforge.github.io/BoneFractureDetectionSite"],  # Consider specifying trusted origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
